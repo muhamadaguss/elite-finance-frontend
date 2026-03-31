@@ -50,6 +50,7 @@ export default function ReceiptScan() {
       const resp = await fetch(`${apiBase}/receipt/scan`, {
         method: "POST",
         body: formData,
+        credentials: "include",
       });
 
       if (!resp.ok) {
@@ -94,6 +95,7 @@ export default function ReceiptScan() {
           categoryId: editedResult.categoryId,
           notes: editedResult.notes,
         }),
+        credentials: "include",
       });
 
       if (!resp.ok) throw new Error("Failed to save transaction");
