@@ -33,5 +33,5 @@ jobs:
         push: true
         platforms: linux/arm64
         build-args: |
-          VITE_API_URL=https://finance-backend.jobmarket.my.id/
+          VITE_API_URL=https://finance-backend.jobmarket.my.id
         tags: ${{ secrets.DOCKERHUB_USERNAME }}/elite-finance-frontend:latest
