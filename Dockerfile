@@ -19,7 +19,7 @@ RUN pnpm run build
 FROM nginx:alpine
 
 # Copy built assets to Nginx html folder
-COPY --from=builder /app/dist /usr/share/nginx/html
+COPY --from=builder /app/dist/public /usr/share/nginx/html
 
 # Copy custom Nginx config for SPA routing
 COPY nginx.conf /etc/nginx/conf.d/default.conf
