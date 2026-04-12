@@ -12,6 +12,7 @@ import Transactions from "@/pages/transactions";
 import Categories from "@/pages/categories";
 import Analytics from "@/pages/analytics";
 import Assets from "@/pages/assets";
+import Goals from "@/pages/goals";
 import Import from "@/pages/import";
 import ReceiptScan from "@/pages/receipt";
 
@@ -32,6 +33,7 @@ function Router() {
       <Route path="/categories" component={Categories} />
       <Route path="/analytics" component={Analytics} />
       <Route path="/assets" component={Assets} />
+      <Route path="/goals" component={Goals} />
       <Route path="/receipt" component={ReceiptScan} />
       <Route path="/import" component={Import} />
       <Route component={NotFound} />
@@ -47,7 +49,19 @@ function AuthGate() {
       <div className="min-h-screen bg-background flex items-center justify-center">
         <div className="flex flex-col items-center gap-4">
           <div className="w-12 h-12 rounded-xl bg-gradient-to-tr from-primary to-accent flex items-center justify-center shadow-lg animate-pulse">
-            <svg className="w-7 h-7 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+            <svg
+              className="w-7 h-7 text-white"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={2}
+                d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+              />
+            </svg>
           </div>
           <p className="text-muted-foreground text-sm">Loading...</p>
         </div>

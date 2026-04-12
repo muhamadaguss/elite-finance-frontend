@@ -9,11 +9,12 @@ import {
   Wallet,
   UploadCloud,
   ScanLine,
+  Target,
   LogOut,
   Menu,
   X,
   Sun,
-  Moon
+  Moon,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { useTheme } from "@/lib/theme";
@@ -25,6 +26,7 @@ const navItems = [
   { icon: Tags, label: "Categories", href: "/categories" },
   { icon: PieChart, label: "Analytics", href: "/analytics" },
   { icon: Wallet, label: "Assets", href: "/assets" },
+  { icon: Target, label: "Goals", href: "/goals" },
   { icon: ScanLine, label: "Scan Struk", href: "/receipt" },
   { icon: UploadCloud, label: "Import", href: "/import" },
 ];
@@ -44,7 +46,9 @@ export function AppLayout({ children }: { children: React.ReactNode }) {
             <div className="w-10 h-10 rounded-xl bg-gradient-to-tr from-primary to-accent flex items-center justify-center shadow-lg shadow-primary/30">
               <Wallet className="w-6 h-6 text-white" />
             </div>
-            <span className="text-xl font-extrabold tracking-tight text-gradient">Lumina</span>
+            <span className="text-xl font-extrabold tracking-tight text-gradient">
+              Lumina
+            </span>
           </Link>
         </div>
 
@@ -56,7 +60,9 @@ export function AppLayout({ children }: { children: React.ReactNode }) {
                 <div
                   className={cn(
                     "flex items-center gap-4 px-4 py-3.5 rounded-xl font-medium transition-all duration-300 relative group overflow-hidden",
-                    isActive ? "text-primary" : "text-muted-foreground hover:text-foreground hover:bg-muted/50"
+                    isActive
+                      ? "text-primary"
+                      : "text-muted-foreground hover:text-foreground hover:bg-muted/50",
                   )}
                 >
                   {isActive && (
@@ -64,10 +70,21 @@ export function AppLayout({ children }: { children: React.ReactNode }) {
                       layoutId="activeTab"
                       className="absolute inset-0 bg-primary/10 border border-primary/20 rounded-xl"
                       initial={false}
-                      transition={{ type: "spring", stiffness: 300, damping: 30 }}
+                      transition={{
+                        type: "spring",
+                        stiffness: 300,
+                        damping: 30,
+                      }}
                     />
                   )}
-                  <item.icon className={cn("w-5 h-5 relative z-10", isActive ? "text-primary" : "group-hover:text-primary transition-colors")} />
+                  <item.icon
+                    className={cn(
+                      "w-5 h-5 relative z-10",
+                      isActive
+                        ? "text-primary"
+                        : "group-hover:text-primary transition-colors",
+                    )}
+                  />
                   <span className="relative z-10">{item.label}</span>
                 </div>
               </Link>
@@ -79,11 +96,21 @@ export function AppLayout({ children }: { children: React.ReactNode }) {
           {user && (
             <div className="flex items-center gap-3 px-4 py-3 mb-2">
               <div className="w-8 h-8 rounded-full bg-primary/20 flex items-center justify-center text-sm font-bold text-primary">
-                {(user.firstName?.[0] || user.username?.[0] || "?").toUpperCase()}
+                {(
+                  user.firstName?.[0] ||
+                  user.username?.[0] ||
+                  "?"
+                ).toUpperCase()}
               </div>
               <div className="flex-1 min-w-0">
-                <p className="text-sm font-medium truncate">{user.firstName || user.username}</p>
-                {user.firstName && <p className="text-xs text-muted-foreground truncate">@{user.username}</p>}
+                <p className="text-sm font-medium truncate">
+                  {user.firstName || user.username}
+                </p>
+                {user.firstName && (
+                  <p className="text-xs text-muted-foreground truncate">
+                    @{user.username}
+                  </p>
+                )}
               </div>
             </div>
           )}
@@ -91,10 +118,17 @@ export function AppLayout({ children }: { children: React.ReactNode }) {
             onClick={toggleTheme}
             className="flex items-center gap-4 px-4 py-3.5 w-full rounded-xl font-medium text-muted-foreground hover:text-foreground hover:bg-muted/50 transition-colors"
           >
-            {theme === "dark" ? <Sun className="w-5 h-5" /> : <Moon className="w-5 h-5" />}
+            {theme === "dark" ? (
+              <Sun className="w-5 h-5" />
+            ) : (
+              <Moon className="w-5 h-5" />
+            )}
             <span>{theme === "dark" ? "Light Mode" : "Dark Mode"}</span>
           </button>
-          <button onClick={logout} className="flex items-center gap-4 px-4 py-3.5 w-full rounded-xl font-medium text-muted-foreground hover:text-destructive hover:bg-destructive/10 transition-colors">
+          <button
+            onClick={logout}
+            className="flex items-center gap-4 px-4 py-3.5 w-full rounded-xl font-medium text-muted-foreground hover:text-destructive hover:bg-destructive/10 transition-colors"
+          >
             <LogOut className="w-5 h-5" />
             <span>Sign Out</span>
           </button>
@@ -110,11 +144,25 @@ export function AppLayout({ children }: { children: React.ReactNode }) {
           <span className="text-lg font-bold text-gradient">Lumina</span>
         </Link>
         <div className="flex items-center gap-2">
-          <button onClick={toggleTheme} className="text-muted-foreground hover:text-foreground p-2 transition-colors">
-            {theme === "dark" ? <Sun className="w-5 h-5" /> : <Moon className="w-5 h-5" />}
+          <button
+            onClick={toggleTheme}
+            className="text-muted-foreground hover:text-foreground p-2 transition-colors"
+          >
+            {theme === "dark" ? (
+              <Sun className="w-5 h-5" />
+            ) : (
+              <Moon className="w-5 h-5" />
+            )}
           </button>
-          <button onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)} className="text-foreground p-2">
-            {isMobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+          <button
+            onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+            className="text-foreground p-2"
+          >
+            {isMobileMenuOpen ? (
+              <X className="w-6 h-6" />
+            ) : (
+              <Menu className="w-6 h-6" />
+            )}
           </button>
         </div>
       </div>
@@ -126,11 +174,19 @@ export function AppLayout({ children }: { children: React.ReactNode }) {
             {navItems.map((item) => {
               const isActive = location === item.href;
               return (
-                <Link key={item.href} href={item.href} onClick={() => setIsMobileMenuOpen(false)}>
-                  <div className={cn(
-                    "flex items-center gap-4 px-4 py-4 rounded-xl text-lg font-medium",
-                    isActive ? "bg-primary/20 text-primary border border-primary/30" : "text-muted-foreground"
-                  )}>
+                <Link
+                  key={item.href}
+                  href={item.href}
+                  onClick={() => setIsMobileMenuOpen(false)}
+                >
+                  <div
+                    className={cn(
+                      "flex items-center gap-4 px-4 py-4 rounded-xl text-lg font-medium",
+                      isActive
+                        ? "bg-primary/20 text-primary border border-primary/30"
+                        : "text-muted-foreground",
+                    )}
+                  >
                     <item.icon className="w-6 h-6" />
                     {item.label}
                   </div>
@@ -144,23 +200,42 @@ export function AppLayout({ children }: { children: React.ReactNode }) {
             {user && (
               <div className="flex items-center gap-3 px-4 py-3 mb-2">
                 <div className="w-10 h-10 rounded-full bg-primary/20 flex items-center justify-center text-sm font-bold text-primary">
-                  {(user.firstName?.[0] || user.username?.[0] || "?").toUpperCase()}
+                  {(
+                    user.firstName?.[0] ||
+                    user.username?.[0] ||
+                    "?"
+                  ).toUpperCase()}
                 </div>
                 <div className="flex-1 min-w-0">
-                  <p className="text-sm font-medium truncate">{user.firstName || user.username}</p>
-                  {user.firstName && <p className="text-xs text-muted-foreground truncate">@{user.username}</p>}
+                  <p className="text-sm font-medium truncate">
+                    {user.firstName || user.username}
+                  </p>
+                  {user.firstName && (
+                    <p className="text-xs text-muted-foreground truncate">
+                      @{user.username}
+                    </p>
+                  )}
                 </div>
               </div>
             )}
             <button
-              onClick={() => { toggleTheme(); }}
+              onClick={() => {
+                toggleTheme();
+              }}
               className="flex items-center gap-4 px-4 py-3.5 w-full rounded-xl font-medium text-muted-foreground hover:text-foreground hover:bg-muted/50 transition-colors"
             >
-              {theme === "dark" ? <Sun className="w-5 h-5" /> : <Moon className="w-5 h-5" />}
+              {theme === "dark" ? (
+                <Sun className="w-5 h-5" />
+              ) : (
+                <Moon className="w-5 h-5" />
+              )}
               <span>{theme === "dark" ? "Light Mode" : "Dark Mode"}</span>
             </button>
             <button
-              onClick={() => { setIsMobileMenuOpen(false); logout(); }}
+              onClick={() => {
+                setIsMobileMenuOpen(false);
+                logout();
+              }}
               className="flex items-center gap-4 px-4 py-3.5 w-full rounded-xl font-medium text-muted-foreground hover:text-destructive hover:bg-destructive/10 transition-colors"
             >
               <LogOut className="w-5 h-5" />
@@ -172,9 +247,7 @@ export function AppLayout({ children }: { children: React.ReactNode }) {
 
       {/* Main Content */}
       <main className="flex-1 relative overflow-y-auto lg:h-screen pt-20 lg:pt-0">
-        <div className="max-w-7xl mx-auto p-6 md:p-8 lg:p-12">
-          {children}
-        </div>
+        <div className="max-w-7xl mx-auto p-6 md:p-8 lg:p-12">{children}</div>
       </main>
     </div>
   );
